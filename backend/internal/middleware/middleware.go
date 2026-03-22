@@ -93,8 +93,9 @@ func (rl *RateLimiter) Middleware(next http.Handler) http.Handler {
 		now := time.Now()
 		cutoff := now.Add(-rl.window)
 
-		valid := rl.requests[ip][:0]
-		for _, t := range rl.requests[ip] {
+		existing := rl.requests[ip]
+		valid := make([]time.Time, 0, len(existing))
+		for _, t := range existing {
 			if t.After(cutoff) {
 				valid = append(valid, t)
 			}
