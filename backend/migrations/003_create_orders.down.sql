@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS sip_mandates;
+DROP TABLE IF EXISTS orders;
